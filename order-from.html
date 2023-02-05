@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(218, 229, 248);
+        }
+
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+
+        .input__section {
+            margin-top: 50px;
+        }
+
+
+
+        .input__form {
+            border: 1px solid gray;
+            width: 40%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input__section">
+        <div class="input__form">
+            <h1>Order Form</h1>
+            <form name="myForm" onsubmit="return validateForm()">
+                <label>Full Name:</label>
+                <input type="text" name="fullName" required><br><br>
+                <label>Postal Code:</label>
+                <input type="text" name="postalCode" required><br><br>
+                <label>Email Address:</label>
+                <input type="email" name="email" required><br><br>
+                <label>Confirm Email Address:</label>
+                <input type="email" name="confirmEmail" required><br><br>
+                <label>Select Option:</label>
+                <select name="options" required>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option4">Option 4</option>
+                </select><br><br>
+                <label>Radial Input:</label><br>
+                <input type="radio" name="radialInput" value="input1"> Input 1<br>
+                <input type="radio" name="radialInput" value="input2"> Input 2<br>
+                <input type="radio" name="radialInput" value="input3"> Input 3<br>
+                <input type="radio" name="radialInput" value="input4"> Input 4<br><br>
+                <input type="submit" value="Confirm">
+                <input type="reset" value="Reset">
+            </form>
+
+        </div>
+
+
+    </div>
+
+    <div id="previewDiv"></div>
+
+
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["email"].value;
+            var y = document.forms["myForm"]["confirmEmail"].value;
+            if (x != y) {
+                alert("Email addresses do not match");
+                return false;
+            }
+
+            document.getElementById("previewDiv").innerHTML = "Full Name: " + document.forms["myForm"]["fullName"].value + "<br>" +
+                "Postal Code: " + document.forms["myForm"]["postalCode"].value + "<br>" +
+                "Email Address: " + document.forms["myForm"]["email"].value + "<br>" +
+                "Selected Option: " + document.forms["myForm"]["options"].value + "<br>" +
+                "Selected Radial Input: " + document.querySelector('input[name="radialInput"]:checked').value;
+            return false;
+        }
+    </script>
+</body>
+
+</html>
