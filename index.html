@@ -6,35 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            background-color: rgb(218, 229, 248);
-        }
+    <link rel="stylesheet" href="style.css">
 
-
-        h1 {
-            text-align: center;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-
-        .input__section {
-            margin-top: 50px;
-        }
-
-
-
-        .input__form {
-            border: 1px solid gray;
-            width: 40%;
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -65,13 +38,61 @@
                 <input type="submit" value="Confirm">
                 <input type="reset" value="Reset">
             </form>
-
         </div>
+    </div>
+
+    <br>
+    <hr>
+
+
+    <div class="inner__from">
+        <div class="preview__inner__from">
+            <h4>Thanks for purchasing with us!</h4>
+            <p>Your product will send to: <span id="zipcode">Zo3xDO</span></p>
+            <p>Your Provide Email Address is: <span id="inputEmail">example@gmail.com</span></p>
+        </div>
+        <table>
+            <tr>
+                <td>SL</td>
+                <th>Name</th>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>$744.99</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <h5>Your selected Option</h5>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>2</td>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>$100</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>$199</td>
+            </tr>
+            <tr>
+                <td colspan="3">Total Price</td>
+                <td>$1123</td>
+            </tr>
+        </table>
+
+        <div id="previewDiv"></div>
 
 
     </div>
-
-    <div id="previewDiv"></div>
 
 
     <script>
