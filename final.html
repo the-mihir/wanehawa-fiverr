@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .input__from,
+    #show__input {
+      width: 40%;
+      margin: 40px auto;
+      border: 1px solid gray;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    input {
+      padding: 5px;
+      margin-left: 20px;
+    }
+
+    form>div {
+      margin-bottom: 5px;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+
+    }
+
+    tr,
+    th,
+    td {
+      border: 1px dotted gray;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .input__data {
+      text-align: center;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div class="input__from">
+    <form>
+      <h1>Order From</h1>
+      <div>
+        <label for="name">Fill Name:</label>
+        <input type="text" id="name" name="name">
+      </div>
+      <div>
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" id="postalCode" name="postalCode">
+      </div>
+      <div>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email">
+      </div>
+      <div>
+        <label for="confirmEmail">Confirm Email Address:</label>
+        <input type="email" id="confirmEmail" name="confirmEmail">
+      </div>
+      <div>
+        <label for="product">Select Product:</label>
+        <select id="product" name="product">
+          <option value="773">Dell - $773</option>
+          <option value="455">HP - $455</option>
+          <option value="755">Lenovo - $755</option>
+          <option value="1755">Mac - $1755</option>
+        </select>
+      </div>
+      <div>
+        <p>Select Option You Need</p>
+        <label><input type="radio" name="accessory" value="50">Mouse - $50</label> <br>
+        <label><input type="radio" name="accessory" value="100">Keyboard - $100</label> <br>
+        <label><input type="radio" name="accessory" value="20">Mouse-pad -$20</label> <br>
+        <label><input type="radio" name="accessory" value="120">Headphone - $120</label>
+      </div>
+      <br>
+      <div>
+        <button type="button" onclick="showData()">Confirm</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+
+  </div>
+
+  <div id="show__input" style="display: none;">
+    <div class="input__data">
+      <h4>Thanks for purchasing with us!</h4>
+      <p>Your product will send to: <span id="showPostalCode"></span></p>
+      <p>Email Address: <span id="showEmail"></span></p>
+
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SL</th>
+          <th>Name</th>
+          <th>Product</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span id="showName"></span></td>
+          <td><span id="showProduct"></span></td>
+          <td><span id="showProductPrice"></span></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <h5>Your selected option</h5>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td colspan="3"><span id="showAccessory"></span></td>
+        </tr>
+        <tr>
+          <td colspan="3">Total Price</td>
+          <td><span id="showTotalPrice"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function showData() {
+      // Get the values from the form inputs
+      let name = document.querySelector("#name").value;
+      let postalCode = document.querySelector("#postalCode").value;
+      let email = document.querySelector("#email").value;
+      let product = document.querySelector("#product").value;
+      let productPrice = document.querySelector("#product option:checked").text;
+      let accessory = document.querySelector("input[name=accessory]:checked").value;
+      let accessoryPrice = document.querySelector("input[name=accessory]:checked").nextSibling.textContent;
+
+      // Show the data in the table
+      document.querySelector("#show__input").style.display = "block";
+      document.querySelector("#showPostalCode").innerHTML = postalCode;
+      document.querySelector("#showEmail").innerHTML = email;
+      document.querySelector("#showName").innerHTML = name;
+      document.querySelector("#showProduct").innerHTML = productPrice;
+      document.querySelector("#showProductPrice").innerHTML = "$" + product;
+      document.querySelector("#showAccessory").innerHTML = accessoryPrice;
+      document.querySelector("#showTotalPrice").innerHTML = "$" + (parseInt(product) + parseInt(accessory));
+    }
+  </script>
+</body>
+
+</html>

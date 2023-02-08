@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Resizer and Border Toggler</title>
+  <style>
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    img {
+      width: 300px;
+      height: 200px;
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    .size-buttons {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      background-color: lightblue;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: blue;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="image-container">
+    <img id="image" src="img/image1.jpg" alt="Sample Image">
+    <div class="size-buttons">
+      <button id="small-button">Small</button>
+      <button id="medium-button">Medium</button>
+      <button id="large-button">Large</button>
+      <button id="border-button">Add Borders</button>
+    </div>
+
+  </div>
+
+  <script>
+    const image = document.getElementById("image");
+    const smallButton = document.getElementById("small-button");
+    const mediumButton = document.getElementById("medium-button");
+    const largeButton = document.getElementById("large-button");
+    const borderButton = document.getElementById("border-button");
+
+    smallButton.addEventListener("click", function () {
+      image.style.width = "150px";
+      image.style.height = "100px";
+    });
+
+    mediumButton.addEventListener("click", function () {
+      image.style.width = "300px";
+      image.style.height = "200px";
+    });
+
+    largeButton.addEventListener("click", function () {
+      image.style.width = "450px";
+      image.style.height = "300px";
+    });
+
+    borderButton.addEventListener("click", function () {
+      if (image.style.border === "") {
+        image.style.border = "10px solid black";
+        borderButton.innerHTML = "Remove Borders";
+      } else {
+        image.style.border = "";
+        borderButton.innerHTML = "Add Borders";
+      }
+    });
+  </script>
+
+</body>
+
+</html>

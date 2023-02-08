@@ -6,7 +6,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+
+        .input__section {
+            margin-top: 50px;
+        }
+
+        .input__form {
+            border: 1px solid gray;
+            width: 40%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        hr {
+            width: 100%;
+            margin: 50px auto;
+            background-color: #fff;
+
+        }
+
+        #myDiv {
+            display: none;
+        }
+
+        .inner__from {
+            border: 1px solid gray;
+            width: 40%;
+            margin: 20px auto 81px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .preview__inner__from h3 {
+            text-align: center;
+            line-height: 50px;
+
+        }
+
+        .preview__inner__from p {
+            text-align: center;
+            line-height: 22px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px dotted gray;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -64,11 +134,43 @@
             </tr>
         </table>
 
-
-
     </div>
 
-    <script src="custom.js"></script>
+    <script>
+        function validateForm() {
+
+            document.getElementById("myDiv").style.display = "block";
+
+
+            var x = document.forms["myForm"]["email"].value;
+            var y = document.forms["myForm"]["confirmEmail"].value;
+            if (x != y) {
+                alert("Email addresses do not match");
+                return false;
+            }
+
+
+            document.getElementById('zipcode').innerHTML = document.forms["myForm"]["postalCode"].value;
+            document.getElementById('userEmail').innerHTML = document.forms["myForm"]["email"].value;
+            document.getElementById('userName').innerHTML = document.forms["myForm"]["fullName"].value;
+
+            const select = document.querySelector("select[name='options']");
+            const selectedOption = select.options[select.selectedIndex];
+            const product = selectedOption.getAttribute("name");
+
+
+            document.getElementById('productName').innerHTML = product;
+            document.getElementById('price').innerHTML = document.forms["myForm"]["options"].value;
+
+
+            return false;
+
+
+        }
+
+
+
+    </script>
 
 
 
