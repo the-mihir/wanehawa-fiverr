@@ -46,10 +46,11 @@
 
 
     <div class="inner__from">
-        <div class="preview__inner__from">
+        <!-- <div class="preview__inner__from">
             <h4>Thanks for purchasing with us!</h4>
             <p>Your product will send to: <span id="zipcode">Zo3xDO</span></p>
             <p>Your Provide Email Address is: <span id="inputEmail">example@gmail.com</span></p>
+
         </div>
         <table>
             <tr>
@@ -87,9 +88,52 @@
                 <td colspan="3">Total Price</td>
                 <td>$1123</td>
             </tr>
-        </table>
+        </table> -->
 
-        <div id="previewDiv"></div>
+        <div id="previewDiv">
+            <h4>Thanks for purchasing with us!</h4>
+            <p>Your product will send to: <span id="zipcode"></span></p>
+            <p>Your Provide Email Address is: <span id="inputEmail"></span></p>
+            <table>
+                <tr>
+                    <td>SL</td>
+                    <th>Name</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span id="selectedOption"></span></td>
+                    <td><span id="selectedOption"></span></td>
+                    <td><span id="selectedOption"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <h5>Your selected Option</h5>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>2</td>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>$199</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Total Price</td>
+                    <td>$1123</td>
+                </tr>
+            </table>
+
+
+        </div>
 
 
     </div>
@@ -103,12 +147,20 @@
                 alert("Email addresses do not match");
                 return false;
             }
+            document.getElementById('zipcode').innerHTML = document.forms["myForm"]["postalCode"].value;
+            document.getElementById('inputEmail').innerHTML = document.forms["myForm"]["email"].value;
+            document.getElementById('selectedOption').innerHTML = document.forms["myForm"]["options"];
 
-            document.getElementById("previewDiv").innerHTML = "Full Name: " + document.forms["myForm"]["fullName"].value + "<br>" +
-                "Postal Code: " + document.forms["myForm"]["postalCode"].value + "<br>" +
-                "Email Address: " + document.forms["myForm"]["email"].value + "<br>" +
-                "Selected Option: " + document.forms["myForm"]["options"].value + "<br>" +
-                "Selected Radial Input: " + document.querySelector('input[name="radialInput"]:checked').value;
+
+            // document.getElementById('fullName').innerHTML = "Full Name: " + document.forms["myForm"]["fullName"].value;
+
+            // getElementById("fullName").innerHTML.p = "Full Name: " + document.forms["myForm"]["fullName"].value;
+
+            // document.getElementById("previewDiv").innerHTML = "Full Name: " + document.forms["myForm"]["fullName"].value + "<br>" +
+            //     "Postal Code: " + document.forms["myForm"]["postalCode"].value + "<br>" +
+            //     "Email Address: " + document.forms["myForm"]["email"].value + "<br>" +
+            //     "Selected Option: " + document.forms["myForm"]["options"].value + "<br>" +
+            //     "Selected Radial Input: " + document.querySelector('input[name="radialInput"]:checked').value;
             return false;
         }
     </script>

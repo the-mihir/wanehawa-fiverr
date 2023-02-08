@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="input__section">
+        <div class="input__form">
+            <h1>Order Form</h1>
+            <form name="myForm" onsubmit="return validateForm()">
+                <label>Full Name:</label>
+                <input type="text" name="fullName" id="fullName" required><br><br>
+                <label>Postal Code:</label>
+                <input type="text" name="postalCode" id="postalcode" required><br><br>
+                <label>Email Address:</label>
+                <input type="email" name="email" id="email" required><br><br>
+                <label>Confirm Email Address:</label>
+                <input type="email" name="confirmEmail" required><br><br>
+                <label>Select Option:</label>
+                <select name="options" required>
+                    <option value="456" name="Dell Laptop" id="dell">Dell - $456</option>
+                    <option value="654" name="HP Laptop">HP - $654</option>
+                    <option value="345" name="Lenovo Laptop">Lenovo - $345</option>
+                    <option value="1123" name="Mac Pro Laptop">Mac Pro - $1123</option>
+                </select><br><br>
+                <label>Radial Input:</label><br>
+                <input type="radio" name="mouse" value="50"> Mouse - $50<br>
+                <input type="radio" name="kyebord" value="76"> Kyebord - $76<br>
+                <input type="radio" name="headphone" value="110"> Headphone - $110<br>
+                <input type="radio" name="mousePad" value="20"> Mouse Pad - $20<br><br>
+                <input type="submit" value="Confirm">
+                <input type="reset" value="Reset">
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="inner__from" id="myDiv">
+        <div class="preview__inner__from">
+            <h3>Thanks for purchasing with us!</h3>
+            <p>Your product will send to: <span id="zipcode"></span></p>
+            <p>Your Provided Email Address: <span id="userEmail"></span></p>
+
+        </div>
+        <table id="orderTable">
+            <tr>
+                <td>SL</td>
+                <th>Name</th>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><span id="userName"></span></td>
+                <td><span id="productName"></span></td>
+                <td>$<span id="price"></span></td>
+            </tr>
+        </table>
+
+
+
+    </div>
+
+    <script src="custom.js"></script>
+
+
+
+
+</body>
+
+</html>

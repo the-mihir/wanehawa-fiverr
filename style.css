@@ -30,6 +30,9 @@ hr {
 
 }
 
+#myDiv {
+    display: none;
+}
 
 .inner__from {
     border: 1px solid gray;
@@ -39,7 +42,7 @@ hr {
     border-radius: 10px;
 }
 
-.preview__inner__from h4 {
+.preview__inner__from h3 {
     text-align: center;
     line-height: 50px;
 

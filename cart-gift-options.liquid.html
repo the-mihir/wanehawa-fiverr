@@ -1,0 +1,225 @@
+{% assign gift_products = all_products['carte-de-souhaits'] %}
+<div class="gift-options--container">
+  <div class="no-gift-field">
+    <input type="checkbox" value="no-gift" id="no-gift">
+    <label for="no-gift">Expédier sans carte de souhaits</label>
+  </div>
+  <div class="gift-options--fields">
+    <div class="gift-options-product">
+      {% for variant in gift_products.variants %}
+        <input type="radio" id="variant-{{ variant.id }}" value="{{ variant.title }}" data-variant="{{ variant.id }}" class="gift-option-input" name="attributes[Gift Option]" form="cart">
+        <label for="variant-{{ variant.id }}">
+          <img src="{{ variant.featured_image | img_url: '200x' }}">
+          <span>{{ variant.title }}</span>
+        </label>
+      {% endfor %}
+    </div>
+    <div class="gift-options--input-fields">
+      <div class="gift-options-input">
+        <span>De:</span>
+        <input type="text" name="attributes[de]" form="cart" require />
+      </div>
+      <div class="gift-options-input">
+        <span>A:</span>
+        <input type="text" name="attributes[a]" form="cart" require />
+      </div>
+      <div class="gift-options-textarea">
+        <p>Message</p>
+        <textarea type="text" maxlength="125" placeholder="Écrire votre message ici." name="attributes[message]" form="cart" require></textarea>
+        <span><span class="input-words">0</span>/<span class="max-limit">125</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const giftProduct = {{ gift_products | json }};
+  const giftVariants = giftProduct.variants.map((variant) => {
+    return variant.id;
+  })
+  const giftContainer = document.querySelector('.gift-options--container');
+  let {items} = {{ cart | json }};
+  console.log('cart', items);
+  console.log('product', giftVariants);
+  const initAllInputs = () => {
+    giftContainer.querySelectorAll('.gift-options--input-fields input, .gift-options--input-fields textarea').forEach((input) => {
+      input.value = '';
+    });
+  }
+  const inputTextarea = () => {
+    giftContainer.querySelector('textarea').addEventListener('keyup', (e) => {
+      giftContainer.querySelector('.input-words').textContent = e.target.value.length;
+      if(document.querySelector('#no-gift').checked) return false;
+      if(e.target.value.length > 0) {
+        document.querySelectorAll('button#checkout')[1].removeAttribute('disabled');
+      } else {
+        document.querySelectorAll('button#checkout')[1].setAttribute('disabled','disabled');
+      }
+    });
+  }
+  const updateInputs = () => {
+    giftContainer.querySelectorAll('.gift-option-input').forEach((input) => {
+      input.addEventListener('change', () => {
+        if(!document.querySelector('#no-gift').checked) {
+          addGiftProduct(input.dataset.variant);
+        }
+        giftContainer.querySelector('.input-words').textContent = 0;
+        if(input.dataset.variant == '42782222581929') {
+          giftContainer.querySelector('.gift-options-textarea textarea').maxLength = 300;
+          giftContainer.querySelector('.gift-options-textarea .max-limit').textContent = '300'
+        } else {
+          giftContainer.querySelector('.gift-options-textarea textarea').maxLength = 125;
+          giftContainer.querySelector('.gift-options-textarea .max-limit').textContent = '125'
+        }
+        if(!document.querySelector('#no-gift').checked) {
+          document.querySelectorAll('button#checkout')[1].setAttribute('disabled', 'disabled');
+        }
+          
+      });
+    });
+  }
+  
+  const addGiftProduct = async (variantId) => {
+    const cartApiFirst = await fetch('/cart.js');
+    const cartJsonFirst = await cartApiFirst.json();
+    items = cartJsonFirst.items;
+    console.log(items, variantId);
+    const checkIndex = items.filter((item) => item.id == variantId);
+    if(checkIndex.length > 0) return false;
+    
+    const remainVariant = giftVariants.filter((variant) => variant != variantId)[0].toString();
+    const checkRemainIndex = items.filter((item) => item.id == remainVariant);
+    if(checkRemainIndex.length > 0) {
+      await fetch("/cart/change.js", {
+        method: 'POST',
+        headers: {
+          'content-Type': 'application/json',
+        },
+        body: JSON.stringify({"id":remainVariant, "quantity":"0"})
+      });
+    }
+    
+    const data = {
+      id: variantId
+    }
+    await fetch("/cart/add.js", {
+      method: 'POST',
+      headers: new Headers({'content-type': 'application/json'}),
+      body: JSON.stringify(data)
+    });
+
+    const cartApi = await fetch('/cart.js');
+    const cartJson = await cartApi.json();
+    items = cartJson.items;
+  }
+
+  const removeGift = () => {
+    document.querySelector('#no-gift').addEventListener('change', async () => {
+      const status = document.querySelector('#no-gift').checked;
+      if(!status) {
+        document.querySelectorAll('button#checkout')[1].setAttribute('disabled', 'disabled');
+        giftContainer.querySelectorAll('.gift-option-input').forEach((input) => {
+          input.checked = false;
+        });
+        // addGiftProduct(42492219031721);
+      } else {
+        giftContainer.querySelectorAll('.gift-option-input').forEach((input) => {
+          input.checked = false;
+        });
+        document.querySelectorAll('button#checkout')[1].removeAttribute('disabled');
+        const giftProduct = items.filter((item) => item.product_id == 7569232986281);
+        console.log(giftProduct);
+        if(giftProduct.length == 0) return false;
+        await fetch("/cart/change.js", {
+          method: 'POST',
+          headers: {
+            'content-Type': 'application/json',
+          },
+          body: JSON.stringify({"id":giftProduct[0].id.toString(), "quantity":"0"})
+        });
+      }
+    });
+  }
+  
+  // addGiftProduct(42492219031721);
+  inputTextarea();
+  updateInputs();
+  removeGift();
+
+  window.addEventListener('load', () => {
+    const checkoutBtn = document.querySelectorAll('button#checkout')[1];
+    checkoutBtn.setAttribute('disabled', 'disabled'); 
+  });
+
+</script>
+
+
+<style>
+  .no-gift-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: right;
+    margin-top: 20px;
+  }
+  .no-gift-field label {
+    margin-bottom: 0;
+  }
+  .gift-options--container {
+    max-width: 400px;
+    width: 100%;
+  }
+  .gift-options-product {
+    padding: 10px;
+    border: 1px solid #b9b9b9;
+    margin-bottom: 30px;
+  }
+  .gift-options--container input[type="radio"] {
+    display: none;
+  }
+  .gift-options--container input[type="radio"]:checked + label img {
+    border: 5px solid #b4c059;
+  }
+  .gift-options--fields {
+    text-align: left;
+  }
+  .gift-options-product label {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+  }
+  .gift-options-product label img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 5px solid #afafaf;
+  }
+  .gift-options-product label span {
+    width: 100%;
+  }
+  .gift-options--input-fields input,
+  .gift-options--input-fields textarea {
+    margin: 0;
+    margin-top: 10px;
+  }
+  .gift-options--input-fields {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2%;
+    justify-content: space-around;
+  }
+  .gift-options--input-fields .gift-options-input {
+    width: 49%;
+  }
+  .gift-options--input-fields .gift-options-textarea {
+    width: 100%;
+    text-align: right;
+  }
+  .gift-options--input-fields .gift-options-textarea p {
+    margin-bottom: 0;
+    text-align: left;
+  }
+</style>

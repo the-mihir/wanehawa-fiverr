@@ -1,0 +1,63 @@
+<html>
+
+<head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+    }
+
+    .show__input {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1>Order From</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+
+      <label for="postal_code">Postal Code:</label>
+      <input type="text" id="postal_code" name="postal_code"><br><br>
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email"><br><br>
+
+      <label for="confirm_email">Confirm Email Address:</label>
+      <input type="email" id="confirm_email" name="confirm_email"><br><br>
+
+      <label for="product">Select Product:</label>
+      <select id="product" name="product">
+        <option value="773">Dell - $773</option>
+        <option value="455">HP - $455</option>
+        <option value="755">Lenovo - $755</option>
+        <option value="1755">Mac - $1755</option>
+      </select><br><br>
+
+      <label for="mouse">Mouse - $50</label>
+      <input type="radio" id="mouse" name="accessory" value="50"><br>
+
+      <label for="keyboard">Keyboard - $100</label>
+      <input type="radio" id="keyboard" name="accessory" value="100"><br>
+
+      <label for="mousepad">Mouse Pad - $20</label>
+      <input type="radio" id="mousepad" name="accessory" value="20"><br>
+
+      <label for="headphone">Headphone - $120</label>
+      <input type="radio" id="headphone" name="accessory" value="120"><br><br>
+
+      <button type="button" onclick="confirmOrder()">Confirm</button>
+      <button type="reset">Reset</button>
+    </form>
+  </div>
+
+
+</body>
+
+</html>
